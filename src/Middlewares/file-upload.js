@@ -13,23 +13,9 @@ const storage = multer.diskStorage({
   },
 });
 
-// file Filter for checking file type and size of file
-function fileFilter(req, file, callback) {
-  // The function should call `cb` with a boolean
-
-  // To accept the file pass `true`, like so:
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    callback(new Error("Something went wrong"), true);
-  } else {
-    // To reject this file pass `false`, like so:
-    callback(null, false);
-  }
-}
-
 // uploads file to upload folder
 const upload = multer({
   storage,
-  fileFilter,
 });
 
 // uploading a single file

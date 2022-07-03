@@ -8,7 +8,7 @@ require("dotenv").config();
 // For this project I used mongodb atlas for cloud database
 
 const connect = () => {
-  return mongoose.connect(`${process.env.URL}`);
+  return mongoose.connect("mongodb://localhost:27017/deepanshu");
 };
 
 // export connect function
