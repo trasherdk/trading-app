@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // verifyToken for verifing token exists for a user of not and how is that user to show data
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, `${process.env.JWT__KEY}`, (error, user) => {
+    jwt.verify(token, "trading2560", (error, user) => {
       if (error) return reject(error);
 
       resolve(user);

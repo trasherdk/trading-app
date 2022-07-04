@@ -2,7 +2,6 @@
 const express = require("express");
 const cors = require("cors");
 const connect = require("./src/configs/db");
-require("dotenv").config();
 
 // importing user controller
 const userController = require("./src/controllers/userControl");
@@ -16,9 +15,9 @@ app.use(cors());
 app.use("/auth", userController);
 
 // app.listen to start server
-app.listen(process.env.PORT || 8080, async (req, res) => {
+app.listen(8080, async (req, res) => {
   try {
-    console.log("==> Server started", process.env.PORT || 8080);
+    console.log("==> Server started", 8080);
     await connect();
   } catch (error) {
     console.log("==> Server start ERROR", error);

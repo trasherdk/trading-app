@@ -2,7 +2,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-require("dotenv").config();
 
 // importing model and fileupload functions
 const { upload, uploadSingle } = require("../Middlewares/file-upload");
@@ -16,7 +15,7 @@ const router = express.Router();
 // If you are here to try application you can add you own jwt key for local server
 
 const newToken = (user) => {
-  return jwt.sign({ user }, `${process.env.JWT__KEY}`);
+  return jwt.sign({ user }, "trading2560");
 };
 
 // router.post for posting new user to database
