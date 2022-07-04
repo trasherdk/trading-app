@@ -7,6 +7,7 @@ require("dotenv").config();
 // importing model and fileupload functions
 const { upload, uploadSingle } = require("../Middlewares/file-upload");
 const User = require("../models/userModel");
+const Authenticate = require("../Middlewares/authenticate");
 
 const router = express.Router();
 
@@ -46,12 +47,49 @@ router.post("/register", uploadSingle("profilePhoto"), async (req, res) => {
   }
 });
 
-router.get("", async (req, res) => {
+// login function for user login. User have to use only username and password for login.
+router.post("/login", async (req, res) => {
   try {
-    const user = await User.find().lean().exec();
+    const user = await User.findOne({ email: req.body.email });
 
-    console.log("==> Getting all user");
-    res.status(200).send({ error: false, token: user });
+    if (!user) {
+      console.log("==> User not found");
+      return res.status(400).send({
+        error: true,
+        token: "Something went wrong! Check email or password",
+      });
+    }
+
+    let match = user.checkPassword(req.body.password);
+
+    if (!match) {
+      console.log("-=> Password wrong");
+      return res.status(400).send({
+        error: true,
+        token: "Something went wrong! Check email or password",
+      });
+    }
+
+    const token = newToken(user);
+
+    console.log(`=>> ${user.name} is logged in`);
+
+    res.status(200).send({ error: false, token });
+  } catch (error) {
+    console.log("==> Login user server Error for", req.body.email);
+    res
+      .status(500)
+      .send({ error: true, token: "Something went wrong! Server Error" });
+  }
+});
+
+// getting user details by token
+router.get("/user/details", Authenticate, async (req, res) => {
+  try {
+    const user = req.user;
+
+    console.log(`==> getting user details for ${user.email}`);
+    res.status(201).send({ error: false, token: user });
   } catch (error) {
     console.log("==> getting all user ERROR");
     res.status(500).send({ error: true, token: "Getting all user Error" });
