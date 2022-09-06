@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Deepu2560/trading-app.git"
+    "url": "git+https://github.com/trasherdk/trading-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Deepu2560/trading-app/issues"
+    "url": "https://github.com/trasherdk/trading-app/issues"
   },
-  "homepage": "https://github.com/Deepu2560/trading-app#readme",
+  "homepage": "https://github.com/trasherdk/trading-app#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
